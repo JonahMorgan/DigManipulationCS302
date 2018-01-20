@@ -23,7 +23,7 @@ void draw(){
 }
 
 void mouseClicked(){
-  //img=null;
+ 
   selectInput("Choose an image for editing", "imageSelected");
   
 }
