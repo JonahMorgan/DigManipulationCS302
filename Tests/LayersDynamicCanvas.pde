@@ -12,11 +12,12 @@ void setup(){
 void draw(){
   stroke(0, 0, 0);
   textAlign(CENTER);
+  imageMode(CENTER);
   text("Click to load image", width/2, GUIwidth+15);
  if(imgChosen == true){ 
    for(int j = 0; j<10; j++){
      if(images[j] != null){
- image(images[j], 30, 30+GUIwidth); 
+ image(images[j], 0, 0+GUIwidth); 
      }
    }
 }
