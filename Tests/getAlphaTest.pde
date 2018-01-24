@@ -19,7 +19,7 @@ void draw(){
   if(imageChosen==true){
    
    image(img, imgX, imgY);
-     println(alpha(img.pixels[mouseX+mouseY*width]));
+     println(alpha(img.pixels[mouseX+mouseY*width])); //Find the alpha value of the pixel you are hovering over. 
   }
 
 }
