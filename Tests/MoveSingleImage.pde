@@ -26,13 +26,25 @@ void draw(){
     prevmouseX = mouseX;
     prevmouseY = mouseY;
  } 
+  }else{
+    if((abs(imgX-mouseX )<=img.width/2)&&(abs((imgY)-mouseY)<=img.height/2)){
+      if((abs(pmouseX-mouseX)>1)){
+   move(1, 0);
+   if(abs(pmouseY-mouseY)>1){
+     move(0,1);
+   
+   }
+      }
+ }
+  
   }
   }else{
     if(clicked == true){
-      move();
+      
       clicked = false;
     }}
   }
+  
   
 }
 void mouseClicked(){
@@ -42,10 +54,13 @@ void mouseClicked(){
  }
   
 }
-void move(){
-  imgX+=mouseX-prevmouseX;
-  imgY+=mouseY-prevmouseY;
-}
+void move(int x , int y){
+  if(x==1){
+  imgX+=mouseX-pmouseX;
+  }
+  if(y==1){
+  imgY+=mouseY-pmouseY;
+}}
 
 void imageSelected(File file){
   if (file !=null){
