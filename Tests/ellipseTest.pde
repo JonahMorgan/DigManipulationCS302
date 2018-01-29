@@ -6,6 +6,7 @@ int GUIWidth = 15;
 int imgX, imgY= 320;
 int prevmouseX, prevmouseY =0 ; 
 int shapeX, shapeY = 0;
+String shapeDrawn = "null";
 void setup(){
   size(640, 640);
   surface.setResizable(true);
@@ -53,7 +54,7 @@ void draw(){
     }}
   }}
   //to here
-  
+  drawShape(shapeDrawn)
   
  
 }
@@ -64,6 +65,7 @@ void mouseClicked(){
  }
  if((abs(width/2-mouseX )<=60)&&(abs((height-15)-mouseY)<=12)){
    delay(1000);
+   shapeDrawn = "ellipse"
   shape = true;
    
  }
