@@ -1,7 +1,7 @@
 PImage img;
 PGraphics pg;
 String path;
-boolean imageChosen, clicked = false, ellipse, cornerEstablished = false;
+boolean imageChosen, clicked = false, shape, cornerEstablished = false;
 int GUIWidth = 15;
 int imgX, imgY= 320;
 int prevmouseX, prevmouseY =0 ; 
@@ -11,6 +11,7 @@ void setup(){
   surface.setResizable(true);
   textAlign(CENTER);
   ellipseMode(CORNERS);
+  rectMode(CORNERS);
 }
 void draw(){
   background(75);
@@ -63,7 +64,7 @@ void mouseClicked(){
  }
  if((abs(width/2-mouseX )<=60)&&(abs((height-15)-mouseY)<=12)){
    delay(1000);
-  ellipse = true;
+  shape = true;
    
  }
   
@@ -89,7 +90,7 @@ void imageSelected(File file){
 }
 }
 void drawShape(String Shape){
-  if(ellipse){
+  if(shape){
     if(cornerEstablished== false){
     if (mousePressed && mouseY>15){
         shapeX= mouseX;
