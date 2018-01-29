@@ -5,7 +5,7 @@ boolean imageChosen, clicked = false, ellipse, cornerEstablished = false;
 int GUIWidth = 15;
 int imgX, imgY= 320;
 int prevmouseX, prevmouseY =0 ; 
-PVector ellipseCorner = new PVector(0,0);
+int ellipseX, ellipseY=0;
 void setup(){
   size(640, 640);
   surface.setResizable(true);
@@ -52,24 +52,31 @@ void draw(){
     }}
   }}
   //to here
+  
   if(ellipse){
     if(cornerEstablished== false){
-    if (mousePressed ){
-        ellipseCorner = new PVector(mouseX, mouseY);
-        cornerEstablished = true;
+    if (mousePressed && mouseY>15){
+        ellipseX= mouseX;
+        ellipseY=mouseY;
+      cornerEstablished = true;
     }
     }
   pg.beginDraw();
+  pg.strokeWeight(3);
+  pg.ellipseMode(CORNERS);
   pg.background(img);
-  
-  pg.ellipse(ellipseCorner.x, ellipseCorner.y, mouseX, mouseY);
+  pg.noFill();
+  noFill();
+  ellipse(ellipseX+30, ellipseY+30 , mouseX+30, mouseY+30);
   if(mousePressed==false){
+    pg.ellipse(ellipseX, ellipseY , mouseX, mouseY);
   pg.endDraw();
   img = pg.get();
   ellipse = false;
+  cornerEstablished = false;
   }
   }
-  println(ellipse);
+ 
 }
 void mouseClicked(){
  if((abs(width/2-mouseX )<=60)&&(abs((GUIWidth+15)-mouseY)<=12)){
@@ -77,7 +84,7 @@ void mouseClicked(){
    
  }
  if((abs(width/2-mouseX )<=60)&&(abs((height-15)-mouseY)<=12)){
-   delay(100);
+   delay(1000);
   ellipse = true;
    
  }
