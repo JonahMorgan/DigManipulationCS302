@@ -5,7 +5,7 @@ boolean imageChosen, clicked = false, ellipse, cornerEstablished = false;
 int GUIWidth = 15;
 int imgX, imgY= 320;
 int prevmouseX, prevmouseY =0 ; 
-int ellipseX, ellipseY=0;
+int shapeX, shapeY = 0;
 void setup(){
   size(640, 640);
   surface.setResizable(true);
@@ -53,29 +53,7 @@ void draw(){
   }}
   //to here
   
-  if(ellipse){
-    if(cornerEstablished== false){
-    if (mousePressed && mouseY>15){
-        ellipseX= mouseX;
-        ellipseY=mouseY;
-      cornerEstablished = true;
-    }
-    }
-  pg.beginDraw();
-  pg.strokeWeight(3);
-  pg.ellipseMode(CORNERS);
-  pg.background(img);
-  pg.noFill();
-  noFill();
-  ellipse(ellipseX+30, ellipseY+30 , mouseX+30, mouseY+30);
-  if(mousePressed==false){
-    pg.ellipse(ellipseX, ellipseY , mouseX, mouseY);
-  pg.endDraw();
-  img = pg.get();
-  ellipse = false;
-  cornerEstablished = false;
-  }
-  }
+  
  
 }
 void mouseClicked(){
@@ -110,3 +88,38 @@ void imageSelected(File file){
   imageChosen=true;
 }
 }
+void drawShape(String Shape){
+  if(ellipse){
+    if(cornerEstablished== false){
+    if (mousePressed && mouseY>15){
+        shapeX= mouseX;
+        shapeY=mouseY;
+      cornerEstablished = true;
+    }
+    }
+  pg.beginDraw();
+  pg.strokeWeight(3);
+  pg.ellipseMode(CORNERS);
+  pg.rectMode(CORNERS);
+  pg.background(img);
+  pg.noFill();
+  noFill();
+    if(Shape == "ellipse"){
+
+  ellipse(shapeX+30, shapeY+30 , mouseX+30, mouseY+30);
+    }else{
+        rect(shapeX+30, shapeY+30 , mouseX+30, mouseY+30);
+    }
+  if(mousePressed==false){
+    if(Shape == "ellipse"){
+    pg.ellipse(shapeX, shapeY , mouseX, mouseY);
+    }else{
+    pg.rect(shapeX, shapeY , mouseX, mouseY);
+}
+  pg.endDraw();
+  img = pg.get();
+  ellipse = false;
+  cornerEstablished = false;
+  }
+  }}
+  
