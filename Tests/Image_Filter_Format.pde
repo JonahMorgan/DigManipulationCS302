@@ -14,7 +14,7 @@ void draw(){
   textAlign(CENTER);
   rectMode(CENTER);
   stroke(0);
-  text("Click to here load image", width/2, GUIWidth+15);
+  text("Click here to load image", width/2, GUIWidth+15);
   imageMode(CENTER);
   if(imageChosen==true){
     
