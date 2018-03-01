@@ -37,11 +37,11 @@ void mouseClicked(){
    
  }
   if(imageChosen){
-   pixNoise(); 
+   watercolor(); 
     
   }
 }
-void pixNoise(){
+void waterColor(){
   int radius = 12;
    
   pg.beginDraw();
