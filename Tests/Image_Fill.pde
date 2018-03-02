@@ -11,7 +11,7 @@ void setup() {
   surface.setResizable(true);
   textAlign(CENTER);
   imageMode(CENTER);
-  frameRate(15)
+  frameRate(15);
   infected = new IntList();
 }
 void draw() {
