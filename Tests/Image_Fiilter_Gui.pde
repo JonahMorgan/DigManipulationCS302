@@ -33,26 +33,20 @@ void draw()
 
   background(100, 100, 100);
   fill(100, 100, 100);
-  noStroke();
-
+  noStroke(); //end setup
   stroke(0);
   fill(255);
-  textSize(14);
-  text("File Functions", 60, 15);
-
-
+  textSize(20);
+  text("File Functions", 75, 25); // File Functions End
   stroke(0);
   line(0, 40, 9999, 40);
-  noStroke();
-
+  noStroke(); //Tool Bar line
   stroke(0);
   fill(255);
   textSize(14);
   text("Filter Effects", 300, 15);
-  line(205, 0, 205, 40);
-  noStroke();
-
-  
+  line(150, 0, 150, 40);
+  noStroke(); //Filter Effects End
 
   if (WaterColor)
   {
@@ -81,16 +75,16 @@ void draw()
   if (DropDown) {
 
     fill(loadC);
-    rect(0, 40, 205, 25);
+    rect(0, 40, 150, 25);
     fill(55);
-    text("Load Picture", 102, 58);
+    text("Load Picture", 75, 58);
 
     fill(saveC);
-    rect(0, 65, 205, 25);
+    rect(0, 65, 150, 25);
     fill(55);
-    text("Save Picture", 102, 85);
+    text("Save Picture", 75, 85);
     stroke(0);
-    line(0, 65, 205, 65);
+    line(0, 65, 150, 65);
     loadC = 255;
     saveC = 255;
   }
@@ -98,13 +92,11 @@ void draw()
 void mouseClicked() {
   if ((abs(102-mouseX )<=100)&&(abs((58)-mouseY)<=15)) { //Load Image
   loadC= color(88, 88, 255);
-    selectInput("Choose an image for editing", "imageSelected");
-    
+    selectInput("Choose an image for editing", "imageSelected");  
   }
   if ((abs(102-mouseX )<=100)&&(abs((85)-mouseY)<=15)) { //Load Image
   saveC= color(88, 88, 255);
     selectOutput("Choose a place to outsource:", "imageExport");
-    
   } 
   if ((abs(102-mouseX )<=100)&&(abs((20)-mouseY)<=20)) { //Load Image
     DropDown = !DropDown;
