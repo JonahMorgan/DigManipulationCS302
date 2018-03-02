@@ -1,131 +1,135 @@
 PImage img;
 PGraphics pg;
 String path;
-boolean imageChosen, clicked = false, init, shape, cornerEstablished = false;
+boolean imageChosen, clicked = false, init , shape, cornerEstablished = false;
 int GUIWidth = 15;
 int imgX, imgY= 320;
 int prevmouseX, prevmouseY =0 ; 
 int shapeX, shapeY = 0;
-boolean WaterColor = false;
-boolean PixelatedNoise = false;
-boolean Edges = false;
-boolean Draw = false;
-boolean Snip = false;
-boolean Fill = false;
-boolean Brush = false;
-boolean Crop = false;
-boolean DropDown = false;
-color loadC, saveC = color(0);
-// For the booleans jonah, if you need to aadd gui width/height or img width/height thats up to you
-
-void setup() 
-{
-  size(1000, 600);
+void setup(){
+  size(640, 640);
   surface.setResizable(true);
-  background(185);
   textAlign(CENTER);
-  textSize(16);
   ellipseMode(CORNERS);
 }
-
-void draw()
-{
-
-  background(100, 100, 100);
-  fill(100, 100, 100);
-  noStroke();
-
+void draw(){
+  background(75);
+  textAlign(CENTER);
+  rectMode(CENTER);
   stroke(0);
-  fill(255);
-  textSize(14);
-  text("File Functions", 60, 15);
+  text("Click here to load image", width/2, GUIWidth+15);
+  text("Click here to draw ellipse", width/2, height-15);
 
-
-  stroke(0);
-  line(0, 40, 9999, 40);
-  noStroke();
-
-  stroke(0);
-  fill(255);
-  textSize(14);
-  text("Filter Effects", 300, 15);
-  line(205, 0, 205, 40);
-  noStroke();
-
+  imageMode(CENTER);
+  if(imageChosen==true){
+    
+   image(img, imgX, imgY); 
+   //Move aroud code frome here
+    if(mousePressed){
+      if(shape == false){
+  if(clicked == false){
+ if((abs(imgX-mouseX )<=img.width/2)&&(abs((imgY)-mouseY)<=img.height/2)){
+   clicked = true;
+    prevmouseX = mouseX;
+    prevmouseY = mouseY;
+ } 
+  }else{
+    if((abs(imgX-mouseX )<=img.width/2)&&(abs((imgY)-mouseY)<=img.height/2)){
+      if((abs(pmouseX-mouseX)>1)){
+   move(1, 0);
+   if(abs(pmouseY-mouseY)>1){
+     move(0,1);
+   
+   }
+      }
+ }
   
-
-  if (WaterColor)
-  {
-    //do stuff
   }
-  if (PixelatedNoise)
-  {
-    //do stuff
-  }
-  if (Edges)
-  {
-    //do stuff
-  }
-  if (Crop)
-  {
-    //do stuff
-  }
-  if (Snip)
-  {
-    //do stuff
-  }
-  if (Brush)
-  {
-    //do stuff
-  }
-  if (DropDown) {
-
-    fill(loadC);
-    rect(0, 40, 205, 25);
-    fill(55);
-    text("Load Picture", 102, 58);
-
-    fill(saveC);
-    rect(0, 65, 205, 25);
-    fill(55);
-    text("Save Picture", 102, 85);
-    stroke(0);
-    line(0, 65, 205, 65);
-    loadC = 255;
-    saveC = 255;
-  }
-}
-void mouseClicked() {
-  if ((abs(102-mouseX )<=100)&&(abs((58)-mouseY)<=15)) { //Load Image
-  loadC= color(88, 88, 255);
-    selectInput("Choose an image for editing", "imageSelected");
+  }else{
+    if(clicked == true){
+      
+      clicked = false;
+    }}
+  }}
+  //to here
+  if(shape){
+   drawShape("ellipse"); 
     
   }
-  if ((abs(102-mouseX )<=100)&&(abs((85)-mouseY)<=15)) { //Load Image
-  saveC= color(88, 88, 255);
-    selectOutput("Choose a place to outsource:", "imageExport");
-    
-  } 
-  if ((abs(102-mouseX )<=100)&&(abs((20)-mouseY)<=20)) { //Load Image
-    DropDown = !DropDown;
+  
+  
+ 
+}
+void mouseClicked(){
+ if((abs(width/2-mouseX )<=60)&&(abs((GUIWidth+15)-mouseY)<=12)){
+   selectInput("Choose an image for editing", "imageSelected");
+   
+ }
+ if((abs(width/2-mouseX )<=60)&&(abs((height-15)-mouseY)<=12)){
+  shape = !shape;
+ }
+  
+}
+void move(int x , int y){
+  if(x==1){
+  imgX+=mouseX-pmouseX;
+  }
+  if(y==1){
+  imgY+=mouseY-pmouseY;
+}}
+
+void imageSelected(File file){
+  if (file !=null){
+  path = file.getAbsolutePath();
+  img = loadImage(path);
+  img.loadPixels();
+  pg = createGraphics(img.width, img.height);
+  surface.setSize(img.width+80, img.height+60);
+  imgX = width/2;
+  imgY = height/2;
+  imageChosen=true;
+}
+}
+
+
+void drawShape(String Shape){
+  if(shape){
+    if(cornerEstablished== false){
+    if (mousePressed && mouseY>15){
+        shapeX= mouseX;
+        shapeY=mouseY;
+      cornerEstablished = true;
+    }
+    }
+    if(mousePressed){
+      init = true;
+    }
+    if(init){
+  pg.beginDraw();
+  pg.strokeWeight(3);
+  pg.ellipseMode(CORNERS);
+  pg.rectMode(CORNERS);
+  pg.background(img);
+  pg.noFill();
+  noFill();
+    if(Shape == "ellipse"){
+
+  ellipse(shapeX+30, shapeY+30 , mouseX+30, mouseY+30);
+    }else{
+        rect(shapeX+30, shapeY+30 , mouseX+30, mouseY+30);
+    }if(mousePressed == false){ //if mousePressed is false
+    if(Shape == "ellipse"){
+    pg.ellipse(shapeX, shapeY , mouseX, mouseY);
+    }else{
+    pg.rect(shapeX, shapeY , mouseX, mouseY);
+}
+
+  pg.endDraw();
+  img = pg.get();
+  cornerEstablished = false;
+  init = false;
+  }
+  }
   }
 }
-void imageSelected(File file) {
-  if (file !=null) {
-    path = file.getAbsolutePath();
-    img = loadImage(path);
-    img.loadPixels();
-    pg = createGraphics(img.width, img.height);
-    surface.setSize(img.width+80, img.height+60);
-    imgX = width/2;
-    imgY = height/2;
-    imageChosen=true;
-  }
-}
-void imageExport(File selection) 
-{
-  if (selection != null) {
-    img.save(selection.getAbsolutePath());
-    redraw();
-  }
-}
+  
